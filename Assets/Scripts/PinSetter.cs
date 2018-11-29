@@ -8,13 +8,12 @@ public class PinSetter : MonoBehaviour {
 
     private PinCounter pinCounter;
     private Animator animator;
+    private DragLounch dragLounch;
 
     void Start () {
         animator = GetComponent<Animator>();
         pinCounter = GameObject.FindObjectOfType<PinCounter>();
-	}
-	
-	void Update () {
+        dragLounch = FindObjectOfType<DragLounch>();
 	}
 
     public void RaisePins()
@@ -37,11 +36,13 @@ public class PinSetter : MonoBehaviour {
                 pin.LowerPins();
             }
         }
+        LetItLounch();
     }
 
     public void RenewPins()
     {
-        Instantiate(pinSet, new Vector3(0, 0, 1829), Quaternion.identity);      
+        Instantiate(pinSet, new Vector3(0, 0, 1829), Quaternion.identity);
+        LetItLounch();
     }
 
     void OnTriggerExit(Collider collider)
@@ -57,10 +58,12 @@ public class PinSetter : MonoBehaviour {
     {
         if (action == ActionMaster.Action.Tidy)
         {
+            dragLounch.CanItLounch = false;
             animator.SetTrigger("tidyTrigger");
         }
         else if (action == ActionMaster.Action.Reset)
         {
+            dragLounch.CanItLounch = false;
             animator.SetTrigger("resetTrigger");
             pinCounter.Reset();
         }
@@ -70,8 +73,14 @@ public class PinSetter : MonoBehaviour {
         }
         else if (action == ActionMaster.Action.EndTurn)
         {
+            dragLounch.CanItLounch = false;
             animator.SetTrigger("resetTrigger");
             pinCounter.Reset();
         }
+    }
+
+    public void LetItLounch()
+    {
+        dragLounch.CanItLounch = true;
     }
 }

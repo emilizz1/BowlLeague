@@ -6,6 +6,8 @@ public class DragLounch : MonoBehaviour
 {
     [SerializeField] float extraVelocityModifier = 1.75f;
 
+    public bool CanItLounch = true;
+
     private Ball ball;
     private Vector3 dragStart, dragEnd;
     private float startTime, endTime;
@@ -46,7 +48,7 @@ public class DragLounch : MonoBehaviour
             float lounchSpeedX = (dragEnd.x - dragStart.x) / dragDuration / extraVelocityModifier;
             float lounchSpeedZ = (dragEnd.y - dragStart.y) / dragDuration / extraVelocityModifier;
 
-            if (lounchSpeedZ > 0)
+            if (lounchSpeedZ > 0 && CanItLounch)
             {
                 Vector3 lounchVelocity = new Vector3(lounchSpeedX, 0, lounchSpeedZ);
                 ball.Lounch(lounchVelocity);
