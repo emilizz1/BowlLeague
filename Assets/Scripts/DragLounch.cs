@@ -2,7 +2,9 @@
 using System.Collections;
 
 [RequireComponent(typeof(Ball))]
-public class DragLounch : MonoBehaviour {
+public class DragLounch : MonoBehaviour
+{
+    [SerializeField] float extraVelocityModifier = 1.75f;
 
     private Ball ball;
     private Vector3 dragStart, dragEnd;
@@ -19,7 +21,7 @@ public class DragLounch : MonoBehaviour {
             float xPos = Mathf.Clamp(ball.transform.position.x, -50, 50);
             float yPos = ball.transform.position.y;
             float zPos = ball.transform.position.z;
-            ball.transform.position = new Vector3(xPos, yPos, zPos);
+            ball.transform.position = new Vector3(xPos + amount, yPos, zPos);
         }
     }
 
@@ -41,11 +43,14 @@ public class DragLounch : MonoBehaviour {
 
             float dragDuration = endTime - startTime;
 
-            float lounchSpeedX = (dragEnd.x - dragStart.x) / dragDuration;
-            float lounchSpeedZ = (dragEnd.y - dragStart.y) / dragDuration;
+            float lounchSpeedX = (dragEnd.x - dragStart.x) / dragDuration / extraVelocityModifier;
+            float lounchSpeedZ = (dragEnd.y - dragStart.y) / dragDuration / extraVelocityModifier;
 
-            Vector3 lounchVelocity = new Vector3(lounchSpeedX, 0, lounchSpeedZ);
-            ball.Lounch(lounchVelocity);
+            if (lounchSpeedZ > 0)
+            {
+                Vector3 lounchVelocity = new Vector3(lounchSpeedX, 0, lounchSpeedZ);
+                ball.Lounch(lounchVelocity);
+            }
         }
     }
 }
