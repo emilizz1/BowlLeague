@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FloreRandomizer : MonoBehaviour
+public class FloorRandomizer : MonoBehaviour
 {
     [SerializeField] Material[] materials;
 

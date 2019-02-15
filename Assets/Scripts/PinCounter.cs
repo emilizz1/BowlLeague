@@ -2,7 +2,8 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class PinCounter : MonoBehaviour {
+public class PinCounter : MonoBehaviour
+{
 
     public Text standingDisplay;
 
@@ -11,14 +12,14 @@ public class PinCounter : MonoBehaviour {
     private float lastChangeTime;
     private int lastSettledCount = 10;
     private GameManager gameManager;
-
-    // Use this for initialization
-    void Start () {
+    
+    void Start()
+    {
         gameManager = GameObject.FindObjectOfType<GameManager>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+    
+    void Update()
+    {
         standingDisplay.text = CountStanding().ToString();
 
         if (ballLeftBox)
@@ -38,7 +39,6 @@ public class PinCounter : MonoBehaviour {
         if (currentStanding != lastStandingCount)
         {
             lastChangeTime = Time.time;
-
             lastStandingCount = currentStanding;
             return;
         }
@@ -59,7 +59,6 @@ public class PinCounter : MonoBehaviour {
         standingDisplay.color = Color.green;
         gameManager.Bowl(pinFall);
         ballLeftBox = false;
-
     }
 
     int CountStanding()
@@ -77,6 +76,7 @@ public class PinCounter : MonoBehaviour {
         }
         return count;
     }
+
     void OnTriggerExit(Collider collider)
     {
         if (collider.gameObject.name == "Ball")

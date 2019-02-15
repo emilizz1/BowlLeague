@@ -2,7 +2,8 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class PinSetter : MonoBehaviour {
+public class PinSetter : MonoBehaviour
+{
 
     public GameObject pinSet;
 
@@ -10,11 +11,12 @@ public class PinSetter : MonoBehaviour {
     private Animator animator;
     private DragLounch dragLounch;
 
-    void Start () {
+    void Start()
+    {
         animator = GetComponent<Animator>();
         pinCounter = GameObject.FindObjectOfType<PinCounter>();
         dragLounch = FindObjectOfType<DragLounch>();
-	}
+    }
 
     public void RaisePins()
     {
