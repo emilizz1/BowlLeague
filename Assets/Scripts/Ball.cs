@@ -4,6 +4,7 @@ using System.Collections;
 public class Ball : MonoBehaviour {
 
     public bool inPlay = false;
+    [SerializeField] Texture[] textures;
 
     private Rigidbody rigidBody;
     private AudioSource audioSource;
@@ -14,6 +15,7 @@ public class Ball : MonoBehaviour {
         rigidBody = GetComponent<Rigidbody>();
         rigidBody.useGravity = false;
         startPosition = transform.position;
+        RandomizeTexture();
     }
 
     public void Lounch(Vector3 velocity)
@@ -35,5 +37,10 @@ public class Ball : MonoBehaviour {
         rigidBody.velocity = new Vector3(0, 0, 0);
         rigidBody.angularVelocity = new Vector3(0, 0, 0);
         rigidBody.useGravity = false;
+    }
+
+    void RandomizeTexture()
+    {
+        GetComponent<MeshRenderer>().material.mainTexture = textures[Random.Range(0, textures.Length)];
     }
 }
