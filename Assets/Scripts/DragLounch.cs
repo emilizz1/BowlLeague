@@ -47,6 +47,7 @@ public class DragLounch : MonoBehaviour
 
             float lounchSpeedX = (dragEnd.x - dragStart.x) / dragDuration / extraVelocityModifier;
             float lounchSpeedZ = (dragEnd.y - dragStart.y) / dragDuration / extraVelocityModifier;
+            lounchSpeedX = ThrowHelper(lounchSpeedX);
 
             if (lounchSpeedZ > 0 && CanItLounch)
             {
@@ -54,5 +55,10 @@ public class DragLounch : MonoBehaviour
                 ball.Lounch(lounchVelocity);
             }
         }
+    }
+
+    private float ThrowHelper(float lounchSpeedX)
+    {
+        return lounchSpeedX * 0.75f;
     }
 }
