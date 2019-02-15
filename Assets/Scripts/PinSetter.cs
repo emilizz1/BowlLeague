@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PinSetter : MonoBehaviour
 {
-
     public GameObject pinSet;
+    [SerializeField] GameObject levelFinished;
 
     private PinCounter pinCounter;
     private Animator animator;
@@ -71,7 +72,8 @@ public class PinSetter : MonoBehaviour
         }
         else if (action == ActionMaster.Action.EndGame)
         {
-            throw new UnityException("dont know how to end");
+            levelFinished.SetActive(true);
+            Invoke("LoadMainMenu()", 3f);
         }
         else if (action == ActionMaster.Action.EndTurn)
         {
@@ -79,6 +81,11 @@ public class PinSetter : MonoBehaviour
             animator.SetTrigger("resetTrigger");
             pinCounter.Reset();
         }
+    }
+
+    void LoadMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     public void LetItLounch()

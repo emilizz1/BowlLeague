@@ -12,7 +12,8 @@ public class DragLounch : MonoBehaviour
     private Vector3 dragStart, dragEnd;
     private float startTime, endTime;
 
-	void Start () {
+	void Start ()
+    {
         ball = GetComponent<Ball>();
 	}
 
