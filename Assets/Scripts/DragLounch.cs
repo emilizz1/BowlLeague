@@ -60,6 +60,6 @@ public class DragLounch : MonoBehaviour
 
     private float ThrowHelper(float lounchSpeedX)
     {
-        return lounchSpeedX * 0.75f;
+        return lounchSpeedX * 0.67f;
     }
 }
